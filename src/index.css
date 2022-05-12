@@ -52,3 +52,7 @@ main {
   border-radius: 5px;
   grid-column: 1/-1;
 }
+
+.meme-img {
+  width: 100%;
+}
