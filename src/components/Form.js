@@ -10,8 +10,6 @@ function Form(props) {
 
   const [allMemeImages, setAllMemeImages] = useState(memesData);
 
-  //   const [memeImage, setMemeImage] = useState("");
-
   function getMemeImage() {
     const memesArray = allMemeImages.data.memes;
     const randomNumber = Math.floor(Math.random() * memesArray.length);
@@ -20,16 +18,40 @@ function Form(props) {
       return { ...prevMeme, randomImage: url };
     });
   }
+
+  function handleChange(event) {
+    const { name, value } = event.target;
+    setMeme((prevMeme) => ({
+      ...prevMeme,
+      [name]: value,
+    }));
+  }
   return (
     <main>
       <div className="form-container">
-        <input className="input-1" type="text" />
-        <input className="input-2" type="text" />
+        <input
+          className="input-1"
+          type="text"
+          name="topText"
+          value={meme.topText}
+          onChange={handleChange}
+        />
+        <input
+          className="input-2"
+          type="text"
+          name="bottomText"
+          value={meme.bottomText}
+          onChange={handleChange}
+        />
         <button onClick={getMemeImage} className="btn-get">
           Get a new meme image
         </button>
       </div>
-      <img src={meme.randomImage} className="meme-img" />
+      <div className="meme">
+        <img src={meme.randomImage} className="meme--image" />
+        <h2 className="meme--text top">{meme.topText}</h2>
+        <h2 className="meme--text bottom">{meme.bottomText}</h2>
+      </div>
     </main>
   );
 }
